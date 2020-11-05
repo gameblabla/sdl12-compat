@@ -3039,6 +3039,7 @@ RestoreDestAlpha(SDL12_Surface *dst12, Uint8 *dstalpha)
     }
 }
 
+
 DECLSPEC int SDLCALL
 SDL_UpperBlit(SDL12_Surface *src12, SDL12_Rect *srcrect12, SDL12_Surface *dst12, SDL12_Rect *dstrect12)
 {
@@ -3076,6 +3077,33 @@ SDL_LowerBlit(SDL12_Surface *src12, SDL12_Rect *srcrect12, SDL12_Surface *dst12,
 
     SDL_Rect srcrect20, dstrect20;
     const int retval = SDL20_LowerBlit(src12->surface20,
+                                       srcrect12 ? Rect12to20(srcrect12, &srcrect20) : NULL,
+                                       dst12->surface20,
+                                       dstrect12 ? Rect12to20(dstrect12, &dstrect20) : NULL);
+
+    RestoreDestAlpha(dst12, dstalpha);
+
+    if (srcrect12) {
+        Rect20to12(&srcrect20, srcrect12);
+    }
+
+    if (srcrect12) {
+        Rect20to12(&dstrect20, dstrect12);
+    }
+
+    return retval;
+}
+
+DECLSPEC int SDLCALL
+SDL_SoftStretch(SDL12_Surface *src12, SDL12_Rect *srcrect12, SDL12_Surface *dst12, SDL12_Rect *dstrect12)
+{
+    Uint8 *dstalpha;
+    if (SaveDestAlpha(src12, dst12, &dstalpha) < 0) {
+        return -1;
+    }
+
+    SDL_Rect srcrect20, dstrect20;
+    const int retval = SDL20_SoftStretch(src12->surface20,
                                        srcrect12 ? Rect12to20(srcrect12, &srcrect20) : NULL,
                                        dst12->surface20,
                                        dstrect12 ? Rect12to20(dstrect12, &dstrect20) : NULL);

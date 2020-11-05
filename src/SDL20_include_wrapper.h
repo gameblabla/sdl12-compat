@@ -84,6 +84,7 @@
 #define SDL_LoadBMP_RW IGNORE_THIS_VERSION_OF_SDL_LoadBMP_RW
 #define SDL_SaveBMP_RW IGNORE_THIS_VERSION_OF_SDL_SaveBMP_RW
 #define SDL_LoadWAV_RW IGNORE_THIS_VERSION_OF_SDL_LoadWAV_RW
+#define SDL_SoftStretch IGNORE_THIS_VERSION_OF_SDL_SoftStretch
 #define SDL_UpperBlit IGNORE_THIS_VERSION_OF_SDL_UpperBlit
 #define SDL_LowerBlit IGNORE_THIS_VERSION_OF_SDL_LowerBlit
 #define SDL_ConvertSurface IGNORE_THIS_VERSION_OF_SDL_ConvertSurface
@@ -152,6 +153,7 @@
 #undef SDL_LoadBMP_RW
 #undef SDL_SaveBMP_RW
 #undef SDL_LoadWAV_RW
+#undef SDL_SoftStretch
 #undef SDL_UpperBlit
 #undef SDL_LowerBlit
 #undef SDL_ConvertSurface

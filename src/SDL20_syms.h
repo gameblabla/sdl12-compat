@@ -91,6 +91,7 @@ SDL20_SYM(SDL_Surface *,CreateRGBSurfaceWithFormat,(Uint32 a, int b, int c, int 
 SDL20_SYM(SDL_Surface *,ConvertSurface,(SDL_Surface *a, const SDL_PixelFormat *b, Uint32 c),(a,b,c),return)
 SDL20_SYM(int,LockSurface,(SDL_Surface *a),(a),return)
 SDL20_SYM(void,UnlockSurface,(SDL_Surface *a),(a),)
+SDL20_SYM(int,SoftStretch,(SDL_Surface *a,const SDL_Rect *b,SDL_Surface *c, SDL_Rect *d),(a,b,c,d),return)
 SDL20_SYM(int,UpperBlit,(SDL_Surface *a,const SDL_Rect *b,SDL_Surface *c, SDL_Rect *d),(a,b,c,d),return)
 SDL20_SYM(int,LowerBlit,(SDL_Surface *a,const SDL_Rect *b,SDL_Surface *c, SDL_Rect *d),(a,b,c,d),return)
 SDL20_SYM(SDL_bool,HasColorKey,(SDL_Surface *a),(a),return)
