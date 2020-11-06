@@ -7,9 +7,9 @@ TARGET = libSDL.so
 endif
 
 CFLAGS		+= -D_GNU_SOURCE -DHAVE_LIBC -D_REENTRANT -Isrc
-CFLAGS		+= -std=gnu99 $(shell sdl2-config --cflags)
+CFLAGS		+= -std=gnu99 $(shell $(PKG_CONFIG) --cflags sdl2)
 
-LDFLAGS		+= $(shell sdl2-config --libs)
+LDFLAGS		+= $(shell $(PKG_CONFIG) --libs sdl2)
 
 VPATH		= $(SRCDIR)
 SRC_C		= $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
@@ -32,12 +32,13 @@ $(OBJ_C) : %.o : %.c
 install: install-headers install-lib
 	
 install-headers:
+	mkdir -p $(DESTDIR)$(PREFIX)/include/SDL
 	cp -rp include/*.h $(DESTDIR)$(PREFIX)/include/SDL
 
 install-lib:
 	cp -rp $(TARGET) $(DESTDIR)$(PREFIX)/lib/
-	cp -rp sdl.pc $(DESTDIR)$(PREFIX)/lib/pkgconfig
-	cp -rp sdl-config $(DESTDIR)$(PREFIX)/bin
+	cp -rp sdl.pc $(DESTDIR)$(PREFIX)/lib/pkgconfig/sdl.pc
+	cp -rp sdl-config $(DESTDIR)$(PREFIX)/bin/sdl-config
 
 clean:
 	rm -f $(TARGET) *.o *.a *.so
