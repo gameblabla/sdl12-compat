@@ -1,8 +1,9 @@
 #!/bin/sh
 
-prefix=/usr
-exec_prefix=${prefix}
+prefix=$(dirname $(readlink -e $0))/../../usr
+exec_prefix=$(dirname $(readlink -e $0))/../../usr
 exec_prefix_set=no
+libdir=${exec_prefix}/lib
 
 #usage="\
 #Usage: sdl-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--version] [--cflags] [--libs]"
@@ -44,11 +45,11 @@ while test $# -gt 0; do
       echo -I${prefix}/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
       ;;
     --libs)
-      echo  -lSDL  -lpthread -lasound -lm -lrt
+      echo -L${exec_prefix}/lib -lSDL  -lpthread -lasound -lm -lrt
       ;;
     --static-libs)
 #    --libs|--static-libs)
-      echo  -lSDL  -lpthread  -lm -ldl -lasound -lm -ldl -lpthread -lpthread -lrt
+      echo -L${exec_prefix}/lib -lSDL  -lpthread  -lm -ldl -lasound -lm -ldl -lpthread -lpthread -lrt
       ;;
     *)
       echo "${usage}" 1>&2
